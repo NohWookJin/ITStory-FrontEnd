@@ -1,0 +1,10 @@
+{
+  "extends": ["eslint:recommended", "plugin:react/recommended", "prettier", "plugin:react-hooks/recommended"],
+  "plugins": ["prettier", "react", "react-hooks"],
+  "rules": {
+    "no-undef": "off",
+    "prettier/prettier": "error",
+    "react/react-in-jsx-scope": "off",
+    "no-unused-vars": "off"
+  }
+}
