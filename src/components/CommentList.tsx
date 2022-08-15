@@ -29,7 +29,7 @@ export default function CommentList() {
           <List>
             <Writer>{list.commentWriter}</Writer>
             <Content>{list.commentContent}</Content>
-            <div>
+            <Bottom>
               <Time>{list.createDateTime} 작성되었습니다</Time>
               <Border> | </Border>
               <DeleteBtn
@@ -39,7 +39,7 @@ export default function CommentList() {
               >
                 삭제
               </DeleteBtn>
-            </div>
+            </Bottom>
           </List>
         </Container>
       ))}
@@ -88,9 +88,11 @@ const Writer = styled.span`
 const Content = styled.span`
   font-size: 0.85rem;
 `;
+const Bottom = styled.div`
+  padding-top: 0.5rem;
+`;
 const Time = styled.span`
   font-size: 0.65rem;
-  padding-top: 0.5rem;
   margin-right: 0.3rem;
   opacity: 0.4;
 `;
