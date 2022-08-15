@@ -68,7 +68,7 @@ const CommentWriter = styled.input`
   }
 `;
 const CommentContent = styled.input`
-  width: 80%;
+  width: 77.5%;
   height: 3vh;
   border: none;
   border-bottom: 0.08rem solid rgba(0, 0, 0, 0.1);
@@ -77,7 +77,7 @@ const CommentContent = styled.input`
     outline: none;
   }
   @media screen and (max-width: 1150px) {
-    width: 75%;
+    width: 70%;
   }
   @media screen and (max-width: 500px) {
     width: 70%;
