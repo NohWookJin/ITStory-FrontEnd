@@ -7,6 +7,7 @@ import { instance } from '../../libs/api';
 import { useNavigate } from 'react-router-dom';
 
 interface IGetPosts {
+  postCategory: string;
   postId: number;
   postTitle: string;
   postContent: string;
@@ -31,8 +32,8 @@ export default function usePosts() {
     window.scrollTo(0, 0);
   }, []);
 
-  async function createPost(titleValue: string, contentValue: string) {
-    await instance.post('post/', { postTitle: titleValue, postContent: contentValue });
+  async function createPost(titleValue: string, contentValue: string, categoryValue: string) {
+    await instance.post('post/', { postTitle: titleValue, postContent: contentValue, postCategory: categoryValue });
     refreshPosts();
   }
 
