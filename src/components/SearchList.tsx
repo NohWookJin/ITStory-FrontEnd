@@ -1,23 +1,26 @@
-import { useEffect, useState } from 'react';
 import usePosts from '../hooks/api/usePosts';
-import { colors } from '../styles/Colors';
-import { GlobalStyle } from '../styles/GlobalStyle';
-
-import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 
-export default function ListSection() {
-  const { postValue } = usePosts();
+import styled from 'styled-components';
+import { colors } from '../styles/Colors';
+
+export default function SearchList() {
+  const { searchValue } = usePosts();
+  console.log(searchValue);
 
   return (
     <>
       <Container>
-        {postValue.map(list => (
+        <Result>
+          <Text>검색결과 </Text>
+          <Number>{` "${searchValue.length}"`}</Number>
+          <Textwo></Textwo>
+        </Result>
+        {searchValue.map(list => (
           <List key={list.postId}>
             <StlyedLink to={`/posts/${list.postId}`}>
               <Title>{list.postTitle}</Title>
               <Category>{list.postCategory}</Category>
-              {/* <Content>{list.postContent}</Content> */}
               <Wrapper>
                 <div>
                   <Id>{list.postId}번째 글</Id>
@@ -33,6 +36,25 @@ export default function ListSection() {
   );
 }
 
+const Result = styled.div`
+  margin-top: 4rem;
+  margin-bottom: 4rem;
+  margin-left: 0.3rem;
+  display: flex;
+  align-items: center;
+`;
+const Text = styled.span`
+  font-size: 2rem;
+  margin-right: 0.5rem;
+`;
+const Number = styled.span`
+  font-size: 2.5rem;
+  font-weight: 600;
+  color: ${colors.main};
+`;
+const Textwo = styled.span`
+  font-size: 2rem;
+`;
 const Container = styled.div`
   width: 100vw;
   margin-top: 2.5rem;

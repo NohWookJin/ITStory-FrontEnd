@@ -3,6 +3,7 @@ interface IIndividual {
     postId: number;
     postTitle: string;
     postContent: string;
+    postCategory: string;
     commentCount: number;
     createTime: string;
   };

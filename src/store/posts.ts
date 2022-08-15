@@ -14,3 +14,7 @@ export const commentState = atom<IComment[]>({
   key: 'commentsState',
   default: [],
 });
+export const searchValueState = atom<IPost[]>({
+  key: 'searchState',
+  default: [],
+});
