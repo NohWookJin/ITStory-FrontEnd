@@ -86,14 +86,13 @@ const Container = styled.div`
   flex-direction: column;
   align-items: center;
   width: 100%;
-  height: 100%;
-  overflow: hidden;
+  height: 100vh;
 `;
 const Form = styled.form`
   display: flex;
   flex-direction: column;
   width: 80%;
-  margin-top: 1.5rem;
+  margin-top: 2.3rem;
 `;
 const TitleInput = styled.input`
   :focus {
@@ -117,21 +116,11 @@ const CategoryInput = styled.input`
   padding-left: 0.1rem;
   opacity: 0.7;
 `;
-const ContentInput = styled.textarea`
-  :focus {
-    outline: none;
-  }
-  height: 60vh;
-  border: none;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
-  margin-bottom: 1rem;
-  padding-left: 0.1rem;
-  word-wrap: break-word;
-`;
 const BtnContainer = styled.div`
   display: flex;
   justify-content: flex-start;
   margin-top: 0.5rem;
+  padding-bottom: 1rem;
 `;
 const PatchBtn = styled.button`
   border: none;

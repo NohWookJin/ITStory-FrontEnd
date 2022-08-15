@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 //components
 import Header from './components/Header';
@@ -9,20 +9,23 @@ import usePosts from './hooks/api/usePosts';
 //css
 import styled, { ThemeProvider } from 'styled-components';
 import { GlobalStyle } from './styles/GlobalStyle';
-import { colors, lightTheme, darkTheme, theme } from './styles/Colors';
+// import { colors } from './styles/Colors';
+// import { lightTheme, darkTheme } from './styles/Theme';
 
 export default function App() {
   const { isLoading } = usePosts();
 
   return (
-    <Container>
+    <>
       <GlobalStyle />
-      <Header />
-      <IntroSection />
-      <Main />
-      <ListSection />
-      {isLoading && <Loading />}
-    </Container>
+      <Container>
+        <Header />
+        <IntroSection />
+        <Main />
+        <ListSection />
+        {isLoading && <Loading />}
+      </Container>
+    </>
   );
 }
 

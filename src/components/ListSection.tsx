@@ -62,6 +62,7 @@ const Title = styled.span`
   font-weight: 800;
   margin: 1rem 0;
   margin-bottom: 1.7rem;
+  margin-left: 0.1rem;
 `;
 const Category = styled.div`
   font-size: 0.65rem;
@@ -84,6 +85,7 @@ const Wrapper = styled.div`
   justify-content: space-between;
   margin-top: 0.5rem;
   margin-bottom: 1rem;
+  margin-left: 0.1rem;
 `;
 const Id = styled.span`
   font-size: 0.7rem;

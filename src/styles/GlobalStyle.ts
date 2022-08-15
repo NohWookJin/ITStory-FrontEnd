@@ -6,16 +6,19 @@ export const GlobalStyle = createGlobalStyle`
         padding: 0;
         box-sizing: border-box;
         text-decoration: none;
+        font-family: "Nanum";
     }
-    body {
-        font-family: "D2";
-    }
+
     @font-face {
-        font-family: "HANNA";
-        src: url("../fonts/BMHANNAPro.ttf");
-    }
+    font-family: "D2";
+    src: url("./fonts/D2Coding-Ver1.3.2-20180524-all.ttc");
+    },
     @font-face {
-        font-family: "D2";
-        src: url("../fonts/D2Coding-Ver1.3.2-20180524-all.ttc");
+    font-family: "BM";
+    src: url("./fonts/BMHANNAPro.ttf");
+    },
+    @font-face {
+    font-family: "Nanum";
+    src: url("./fonts/NanumSquareR.ttf");
     }
 `;
