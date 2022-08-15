@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import { useRecoilState } from 'recoil';
 import { postValueState } from '../../store/posts';
 import { instance } from '../../libs/api';
+import { useNavigate } from 'react-router-dom';
 
 interface IGetPosts {
   postId: number;
@@ -14,24 +15,36 @@ interface IGetPosts {
 
 export default function usePosts() {
   const [postValue, setPostValue] = useRecoilState(postValueState);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const navigate = useNavigate();
 
   async function refreshPosts() {
+    setIsLoading(true);
     const response = await instance.get<{}, IGetPosts[]>('post/list');
     setPostValue(response);
+    setTimeout(() => {
+      setIsLoading(false);
+    }, 500);
   }
   useEffect(() => {
     refreshPosts();
+    window.scrollTo(0, 0);
   }, []);
 
   async function createPost(titleValue: string, contentValue: string) {
-    await instance.post('post/new', { postTitle: titleValue, postContent: contentValue });
+    await instance.post('post/', { postTitle: titleValue, postContent: contentValue });
     refreshPosts();
   }
 
-  async function deletePost(postId: number) {
-    await instance.delete(`/post/list/${postId}`);
+  async function deletePost(postId: number | undefined) {
+    await instance.delete(`/post/${postId}`);
+    navigate('/');
     refreshPosts();
   }
 
-  return { postValue, refreshPosts, createPost, deletePost };
+  async function patchPost(postId: number | undefined) {
+    await instance.patch(`/post/${postId}`);
+  }
+
+  return { postValue, refreshPosts, createPost, deletePost, patchPost, isLoading };
 }
