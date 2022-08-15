@@ -1,5 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+
+import SearchInput from './SearchInput';
 
 // css
 import styled from 'styled-components';
@@ -9,6 +11,17 @@ import { BiMoon, BiSearch } from 'react-icons/bi';
 import { GlobalStyle } from '../styles/GlobalStyle';
 
 export default function Header() {
+  const [isSearch, setIsSearch] = useState<boolean>(false);
+
+  function onClickSearchBtn() {
+    if (isSearch == false) {
+      setIsSearch(true);
+    } else {
+      setIsSearch(false);
+    }
+    console.log(isSearch);
+  }
+
   return (
     <>
       <GlobalStyle />
@@ -16,12 +29,13 @@ export default function Header() {
         <HeaderLeft>
           <StyledLink to={`/`}>
             <Img src={Logo} alt="logo" />
-            <Title>IT STORY</Title>
+            <Title>아이티 스토리</Title>
           </StyledLink>
         </HeaderLeft>
         <HeaderRight>
+          {isSearch && <SearchInput />}
           <Icons>
-            <SearchBtn>
+            <SearchBtn onClick={onClickSearchBtn}>
               <BiSearch className="search" />
             </SearchBtn>
             <DarkModeBtn>
@@ -92,6 +106,9 @@ const Icons = styled.div`
 const SearchBtn = styled.button`
   border: none;
   background-color: ${colors.main};
+  @media screen and (max-width: 800px) {
+    display: none;
+  }
 `;
 const DarkModeBtn = styled.button`
   border: none;
