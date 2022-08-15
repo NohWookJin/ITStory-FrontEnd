@@ -11,7 +11,7 @@ export default function useInput({ initialValue = '' }: Props) {
   function onChangeTitle(e: ChangeEvent<HTMLInputElement>) {
     setTitleValue(e.target.value);
   }
-  function onChangeContent(e: ChangeEvent<HTMLInputElement>) {
+  function onChangeContent(e: ChangeEvent<HTMLTextAreaElement>) {
     setcontentValue(e.target.value);
   }
   function clearInput() {
@@ -19,5 +19,5 @@ export default function useInput({ initialValue = '' }: Props) {
     setcontentValue('');
   }
 
-  return { titleValue, contentValue, onChangeTitle, onChangeContent, clearInput };
+  return { titleValue, contentValue, setcontentValue, onChangeTitle, onChangeContent, clearInput };
 }

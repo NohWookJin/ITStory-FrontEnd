@@ -3,27 +3,28 @@ import React from 'react';
 // css
 import styled from 'styled-components';
 import { colors } from '../styles/Colors';
-import Blog from '../images/blogImage.png';
+import DoorImage from '../images/IMG_0349.jpg';
 
 export default function IntroSection() {
   return (
-    <>
-      <Wrapper>
-        <Image src={Blog} alt="대표이미지" />
-      </Wrapper>
-    </>
+    <Wrapper>
+      <Img src={DoorImage} alt="DoorImage" />
+    </Wrapper>
   );
 }
 
 const Wrapper = styled.div`
-  width: 100%;
-  height: 50vh;
-  padding: 0 20rem;
-  opacity: 0.5;
-  display: flex;
-  align-items: center;
+  padding-top: 3rem;
+  height: 20%;
 `;
-const Image = styled.img`
-  margin-top: 5rem;
+const Img = styled.img`
   width: 100%;
+  height: 55vh;
+  @media screen and (max-width: 1150px) {
+    width: 100%;
+  }
+  @media screen and (max-width: 500px) {
+    width: 100%;
+    height: 30vh;
+  }
 `;
