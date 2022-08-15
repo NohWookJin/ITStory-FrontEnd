@@ -8,6 +8,7 @@ import 'react-mde/lib/styles/css/react-mde-all.css';
 
 //css
 import styled from 'styled-components';
+import { colors } from '../styles/Colors';
 
 const converter = new Showdown.Converter({
   tables: true,
@@ -17,18 +18,26 @@ const converter = new Showdown.Converter({
 });
 
 export default function InputSection(loadSuggestions: any) {
-  const { createPost } = usePosts();
-  const { titleValue, contentValue, setcontentValue, onChangeTitle, onChangeContent, clearInput } = useInput({});
+  const { createPost, patchPost } = usePosts();
+  const {
+    titleValue,
+    contentValue,
+    category,
+    setcontentValue,
+    onChangeTitle,
+    onChangeContent,
+    onChangeCategory,
+    clearInput,
+  } = useInput({});
   const navigate = useNavigate();
   const [selectedTab, setSelectedTab] = React.useState<'write' | 'preview'>('write');
 
   function onSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
-
     if (titleValue.length == 0 || contentValue.length == 0) {
       alert('글 또는 내용이 비어있습니다.');
     } else {
-      createPost(titleValue, contentValue);
+      createPost(titleValue, contentValue, category);
       clearInput();
       navigate('/');
     }
@@ -45,6 +54,11 @@ export default function InputSection(loadSuggestions: any) {
     <Container>
       <Form onSubmit={onSubmit}>
         <TitleInput placeholder="제목을 입력하세요" value={titleValue} onChange={onChangeTitle} />
+        <CategoryInput
+          placeholder="태그를 입력하세요 (예시. FRONTEND | BACKEND | IOS)"
+          value={category}
+          onChange={onChangeCategory}
+        />
         <ReactMde
           value={contentValue}
           onChange={setcontentValue}
@@ -56,10 +70,12 @@ export default function InputSection(loadSuggestions: any) {
               tabIndex: -1,
             },
           }}
+          minEditorHeight={490}
         ></ReactMde>
-        {/* <ContentInput placeholder="내용을 입력하세요" value={contentValue} onChange={onChangeContent} /> */}
-
-        <SubmitBtn>등록</SubmitBtn>
+        <BtnContainer>
+          <SubmitBtn>등록</SubmitBtn>
+          <PatchBtn>수정</PatchBtn>
+        </BtnContainer>
       </Form>
     </Container>
   );
@@ -69,16 +85,15 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
   width: 100%;
   height: 100%;
-  margin-top: 1rem;
+  overflow: hidden;
 `;
 const Form = styled.form`
   display: flex;
   flex-direction: column;
   width: 80%;
-  height: 100vh;
+  margin-top: 1.5rem;
 `;
 const TitleInput = styled.input`
   :focus {
@@ -86,19 +101,21 @@ const TitleInput = styled.input`
   }
   line-height: 3rem;
   padding: 0;
-  padding-top: 3rem;
   padding-bottom: 0.5rem;
   border: none;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+  border-bottom: 1px solid rgba(217, 188, 238, 0.6);
   border-radius: 0.1rem;
   padding-left: 0.1rem;
   font-size: 2rem;
 `;
-const Tags = styled.div`
-  margin: 1rem 0;
-  padding-bottom: 0.5rem;
-  opacity: 0.5;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+const CategoryInput = styled.input`
+  border: none;
+  line-height: 3rem;
+  :focus {
+    outline: none;
+  }
+  padding-left: 0.1rem;
+  opacity: 0.7;
 `;
 const ContentInput = styled.textarea`
   :focus {
@@ -111,8 +128,22 @@ const ContentInput = styled.textarea`
   padding-left: 0.1rem;
   word-wrap: break-word;
 `;
+const BtnContainer = styled.div`
+  display: flex;
+  justify-content: flex-start;
+  margin-top: 0.5rem;
+`;
+const PatchBtn = styled.button`
+  border: none;
+  width: 15%;
+  margin-left: 0.5rem;
+  color: ${colors.white};
+  background-color: ${colors.main};
+`;
 const SubmitBtn = styled.button`
   border: none;
   width: 15%;
   padding: 0.5rem 0;
+  color: ${colors.white};
+  background-color: ${colors.main};
 `;

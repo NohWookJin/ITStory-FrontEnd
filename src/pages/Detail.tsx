@@ -51,6 +51,7 @@ export default function Detail() {
           <Title>{text?.post.postTitle}</Title>
           <SubTitle>
             <Time>{text?.post.createTime}</Time>
+
             <div>
               <Patch
                 onClick={() => {
@@ -68,6 +69,7 @@ export default function Detail() {
               </Delete>
             </div>
           </SubTitle>
+          <Category>{text?.post.postCategory}</Category>
           <Content>{text?.post.postContent}</Content>
           <CommentCount>댓글 {text?.post.commentCount}개</CommentCount>
         </Section>
@@ -77,6 +79,23 @@ export default function Detail() {
     </>
   );
 }
+const Category = styled.div`
+  margin-top: 0.5rem;
+  font-size: 0.65rem;
+  color: ${colors.white};
+  background-color: ${colors.main};
+  border: 0.1rem solid;
+  border-radius: 0.25rem;
+  text-align: center;
+  width: 5.5vw;
+  padding: 0.35rem 0;
+  @media screen and (max-width: 1150px) {
+    width: 10vw;
+  }
+  @media screen and (max-width: 500px) {
+    width: 15vw;
+  }
+`;
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
@@ -107,12 +126,14 @@ const Title = styled.div`
   padding-bottom: 0.3rem;
   border-bottom: 0.1rem solid rgba(217, 188, 238, 0.45);
   min-width: 100%;
+  margin-left: 0.2rem;
 `;
 const SubTitle = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding-top: 1rem;
+  margin-left: 0.2rem;
 `;
 const Time = styled.div`
   font-size: 0.8rem;
@@ -143,9 +164,11 @@ const Content = styled.div`
   line-height: 200%;
   font-size: 0.9rem;
   text-align: justify;
+  margin-left: 0.2rem;
 `;
 const CommentCount = styled.div`
   font-size: 0.8rem;
   padding-bottom: 2rem;
   border-bottom: 0.1rem solid rgba(217, 188, 238, 0.45);
+  margin-left: 0.2rem;
 `;
