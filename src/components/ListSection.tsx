@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import usePosts from '../hooks/api/usePosts';
 import { colors } from '../styles/Colors';
+import { GlobalStyle } from '../styles/GlobalStyle';
 
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
@@ -9,23 +10,26 @@ export default function ListSection() {
   const { postValue } = usePosts();
 
   return (
-    <Container>
-      {postValue.map(list => (
-        <List key={list.postId}>
-          <StlyedLink to={`/posts/${list.postId}`}>
-            <Title>{list.postTitle}</Title>
-            {/* <Content>{list.postContent}</Content> */}
-            <Wrapper>
-              <div>
-                <Id>{list.postId}번째 글</Id>
-                <Border>|</Border>
-                <Time>{list.createTime}</Time>
-              </div>
-            </Wrapper>
-          </StlyedLink>
-        </List>
-      ))}
-    </Container>
+    <>
+      <Container>
+        {postValue.map(list => (
+          <List key={list.postId}>
+            <StlyedLink to={`/posts/${list.postId}`}>
+              <Title>{list.postTitle}</Title>
+              <Category>{list.postCategory}</Category>
+              {/* <Content>{list.postContent}</Content> */}
+              <Wrapper>
+                <div>
+                  <Id>{list.postId}번째 글</Id>
+                  <Border>|</Border>
+                  <Time>{list.createTime}</Time>
+                </div>
+              </Wrapper>
+            </StlyedLink>
+          </List>
+        ))}
+      </Container>
+    </>
   );
 }
 
@@ -57,20 +61,28 @@ const Title = styled.span`
   font-size: 1.8rem;
   font-weight: 800;
   margin: 1rem 0;
+  margin-bottom: 1.7rem;
 `;
-const Content = styled.span`
-  font-size: 0.8rem;
-  opacity: 0.8;
-  width: 100%;
-  height: 2vh;
-  white-space: no-wrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+const Category = styled.div`
+  font-size: 0.65rem;
+  color: ${colors.white};
+  background-color: ${colors.main};
+  border: 0.1rem solid;
+  border-radius: 0.25rem;
+  text-align: center;
+  width: 5.5vw;
+  padding: 0.35rem 0;
+  @media screen and (max-width: 1150px) {
+    width: 10vw;
+  }
+  @media screen and (max-width: 500px) {
+    width: 15vw;
+  }
 `;
 const Wrapper = styled.div`
   display: flex;
   justify-content: space-between;
-  margin-top: 2rem;
+  margin-top: 0.5rem;
   margin-bottom: 1rem;
 `;
 const Id = styled.span`
