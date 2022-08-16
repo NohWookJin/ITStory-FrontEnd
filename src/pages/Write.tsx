@@ -2,23 +2,28 @@
 import Header from '../components/Header';
 import InputSection from '../components/InputSection';
 
+//hooks
+import { useDarkMode } from '../hooks/useDarkMode';
+
 //css
-import styled from 'styled-components';
+import styled, { ThemeProvider } from 'styled-components';
 import { GlobalStyle } from '../styles/GlobalStyle';
-import { colors } from '../styles/Colors';
-import usePosts from '../hooks/api/usePosts';
+import { lightTheme, darkTheme } from '../styles/Theme';
 
 export default function Write() {
-  const { createPost, postValue } = usePosts();
+  const [themeMode, toggleTheme] = useDarkMode();
+  const theme = themeMode === 'lightTheme' ? { mode: lightTheme } : { mode: darkTheme };
 
   return (
-    <Wrapper>
+    <ThemeProvider theme={theme}>
       <GlobalStyle />
-      <Header />
-      <Container>
-        <InputSection></InputSection>
-      </Container>
-    </Wrapper>
+      <Wrapper>
+        <Header themeMode={themeMode} toggleTheme={toggleTheme} />
+        <Container>
+          <InputSection></InputSection>
+        </Container>
+      </Wrapper>
+    </ThemeProvider>
   );
 }
 

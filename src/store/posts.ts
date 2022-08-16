@@ -1,4 +1,5 @@
 import { atom } from 'recoil';
+import { DefaultTheme } from 'styled-components';
 
 export const postValueState = atom<IPost[]>({
   key: 'postsState',
@@ -17,4 +18,8 @@ export const commentState = atom<IComment[]>({
 export const searchValueState = atom<IPost[]>({
   key: 'searchState',
   default: [],
+});
+export const isDarkAtom = atom<boolean>({
+  key: 'isDark',
+  default: false,
 });

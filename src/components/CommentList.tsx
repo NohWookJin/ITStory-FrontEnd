@@ -1,14 +1,8 @@
-import { useState, useEffect } from 'react';
-import { useParams } from 'react-router';
-import { useNavigate } from 'react-router-dom';
-
-//components
-import { instance } from '../libs/api';
+//hooks
 import useComments from '../hooks/api/useComments';
 
 //css
 import styled from 'styled-components';
-import { GlobalStyle } from '../styles/GlobalStyle';
 import { colors } from '../styles/Colors';
 import logo from '../images/ITStoryLogo.png';
 
@@ -53,6 +47,10 @@ const Wrapper = styled.div`
   width: 100%;
   @media screen and (max-width: 1150px) {
     padding: 0 10rem;
+    padding-bottom: 10rem;
+  }
+  @media screen and (max-width: 700px) {
+    padding: 0 7.5rem;
     padding-bottom: 10rem;
   }
   @media screen and (max-width: 500px) {
@@ -100,14 +98,17 @@ const Border = styled.span`
   font-size: 0.65rem;
   opacity: 0.4;
 `;
+
 const DeleteBtn = styled.button`
   border: none;
-  background-color: ${colors.white};
   margin-left: 0.3rem;
   font-size: 0.6rem;
   opacity: 0.4;
+  background-color: ${colors.white};
   :hover {
     opacity: 1;
     color: ${colors.main};
   }
+  background-color: ${({ theme }) => theme.mode.bgColor};
+  color: ${({ theme }) => theme.mode.color};
 `;

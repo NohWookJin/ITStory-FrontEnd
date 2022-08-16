@@ -1,23 +1,19 @@
-import React, { useState, FormEvent, ChangeEvent, createRef } from 'react';
+import React, { useState, FormEvent, ChangeEvent, useRef } from 'react';
 import ReactMde from 'react-mde';
 import { useNavigate } from 'react-router-dom';
+import * as Showdown from 'showdown';
+
+//hooks
 import useInput from '../hooks/useInput';
 import usePosts from '../hooks/api/usePosts';
-import * as Showdown from 'showdown';
-import 'react-mde/lib/styles/css/react-mde-all.css';
 
 //css
 import styled from 'styled-components';
 import { colors } from '../styles/Colors';
+import 'react-mde/lib/styles/css/react-mde-all.css';
+import { text } from 'stream/consumers';
 
-const converter = new Showdown.Converter({
-  tables: true,
-  simplifiedAutoLink: true,
-  strikethrough: true,
-  tasklists: true,
-});
-
-export default function InputSection(loadSuggestions: any) {
+export default function InputSection() {
   const { createPost, patchPost } = usePosts();
   const {
     titleValue,
@@ -106,6 +102,8 @@ const TitleInput = styled.input`
   border-radius: 0.1rem;
   padding-left: 0.1rem;
   font-size: 2rem;
+  background-color: ${({ theme }) => theme.mode.bgColor};
+  color: ${({ theme }) => theme.mode.color};
 `;
 const CategoryInput = styled.input`
   border: none;
@@ -115,6 +113,8 @@ const CategoryInput = styled.input`
   }
   padding-left: 0.1rem;
   opacity: 0.7;
+  background-color: ${({ theme }) => theme.mode.bgColor};
+  color: ${({ theme }) => theme.mode.color};
 `;
 const BtnContainer = styled.div`
   display: flex;

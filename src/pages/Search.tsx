@@ -1,24 +1,33 @@
+import React, { useState } from 'react';
+
 //components
 import Header from '../components/Header';
 import IntroSection from '../components/IntroSection';
 import SearchList from '../components/SearchList';
 import usePosts from '../hooks/api/usePosts';
+import { useDarkMode } from '../hooks/useDarkMode';
+
 //css
-import styled from 'styled-components';
+import styled, { ThemeProvider } from 'styled-components';
 import { GlobalStyle } from '../styles/GlobalStyle';
+import { lightTheme, darkTheme } from '../styles/Theme';
 
 export default function Search() {
   const { isLoading } = usePosts();
+  const [themeMode, toggleTheme] = useDarkMode();
+  const theme = themeMode === 'lightTheme' ? { mode: lightTheme } : { mode: darkTheme };
 
   return (
     <>
-      <GlobalStyle />
-      <Container>
-        <Header />
-        <IntroSection />
-        <SearchList />
-        {isLoading && <Loading />}
-      </Container>
+      <ThemeProvider theme={theme}>
+        <GlobalStyle />
+        <Container>
+          <Header themeMode={themeMode} toggleTheme={toggleTheme} />
+          <IntroSection />
+          <SearchList />
+          {isLoading && <Loading />}
+        </Container>
+      </ThemeProvider>
     </>
   );
 }
