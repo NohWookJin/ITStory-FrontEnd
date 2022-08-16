@@ -3,12 +3,11 @@ import 'styled-components';
 declare module 'styled-components' {
   export interface DefaultTheme {
     mode: {
-      mainBackground: string;
-      primaryText: string;
-      secondaryText: string;
+      color: string;
+      bgColor: string;
+      main: string;
       border: string;
-      background: string;
-      themeIcon: string;
+      link: string;
     };
   }
 }
