@@ -1,16 +1,26 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 
+// components
 import SearchInput from './SearchInput';
 
 // css
 import styled from 'styled-components';
+import { GlobalStyle } from '../styles/GlobalStyle';
 import { colors } from '../styles/Colors';
 import Logo from '../images/ITStoryLogo.png';
-import { BiMoon, BiSearch } from 'react-icons/bi';
-import { GlobalStyle } from '../styles/GlobalStyle';
+import { BiMoon, BiSearch, BiSun } from 'react-icons/bi';
 
-export default function Header() {
+interface IToggle {
+  themeMode: string;
+  toggleTheme: () => void;
+}
+
+interface IWrapper {
+  themeMode: string;
+}
+
+export default function Header({ themeMode, toggleTheme }: IToggle) {
   const [isSearch, setIsSearch] = useState<boolean>(false);
 
   function onClickSearchBtn() {
@@ -19,7 +29,6 @@ export default function Header() {
     } else {
       setIsSearch(false);
     }
-    console.log(isSearch);
   }
 
   return (
@@ -29,7 +38,7 @@ export default function Header() {
         <HeaderLeft>
           <StyledLink to={`/`}>
             <Img src={Logo} alt="logo" />
-            <Title>아이티 스토리</Title>
+            <Title>IT Story</Title>
           </StyledLink>
         </HeaderLeft>
         <HeaderRight>
@@ -38,8 +47,8 @@ export default function Header() {
             <SearchBtn onClick={onClickSearchBtn}>
               <BiSearch className="search" />
             </SearchBtn>
-            <DarkModeBtn>
-              <BiMoon className="darkMode" />
+            <DarkModeBtn onClick={toggleTheme} themeMode={themeMode}>
+              {themeMode === 'lightTheme' ? <BiSun className="darkMode" /> : <BiMoon className="darkMode" />}
             </DarkModeBtn>
           </Icons>
         </HeaderRight>
@@ -47,7 +56,6 @@ export default function Header() {
     </>
   );
 }
-
 const Wrapper = styled.header`
   position: fixed;
   z-index: 9999;
@@ -62,6 +70,9 @@ const Wrapper = styled.header`
   align-items: center;
   @media screen and (max-width: 1150px) {
     padding: 0 10rem;
+  }
+  @media screen and (max-width: 700px) {
+    padding: 0 7.5rem;
   }
   @media screen and (max-width: 500px) {
     padding: 0 5rem;
@@ -110,7 +121,7 @@ const SearchBtn = styled.button`
     display: none;
   }
 `;
-const DarkModeBtn = styled.button`
+const DarkModeBtn = styled.button<IWrapper>`
   border: none;
   background-color: ${colors.main};
 `;
