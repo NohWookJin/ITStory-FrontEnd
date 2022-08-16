@@ -1,24 +1,33 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useParams } from 'react-router';
 import { useNavigate } from 'react-router-dom';
 
+//api
+import { instance } from '../libs/api';
+
 //components
 import Header from '../components/Header';
-import { instance } from '../libs/api';
-import usePosts from '../hooks/api/usePosts';
 import CommentInput from '../components/CommentInput';
 import CommentList from '../components/CommentList';
 
+//hooks
+import usePosts from '../hooks/api/usePosts';
+import { useDarkMode } from '../hooks/useDarkMode';
+
 //css
-import styled from 'styled-components';
+import styled, { ThemeProvider } from 'styled-components';
 import { GlobalStyle } from '../styles/GlobalStyle';
 import { colors } from '../styles/Colors';
+import { lightTheme, darkTheme } from '../styles/Theme';
 
 export default function Detail() {
   const [text, setText] = useState<IIndividual | null>(null);
   const { postId } = useParams();
   const { deletePost, patchPost } = usePosts();
   const navigate = useNavigate();
+
+  const [themeMode, toggleTheme] = useDarkMode();
+  const theme = themeMode === 'lightTheme' ? { mode: lightTheme } : { mode: darkTheme };
 
   useEffect(() => {
     async function renderPost() {
@@ -44,38 +53,39 @@ export default function Detail() {
 
   return (
     <>
-      <GlobalStyle />
-      <Header />
-      <Wrapper>
-        <Section>
-          <Title>{text?.post.postTitle}</Title>
-          <SubTitle>
-            <Time>{text?.post.createTime}</Time>
-
-            <div>
-              <Patch
-                onClick={() => {
-                  onClickPatch(text?.post.postId);
-                }}
-              >
-                수정
-              </Patch>
-              <Delete
-                onClick={() => {
-                  onClickDelete(text?.post.postId);
-                }}
-              >
-                삭제
-              </Delete>
-            </div>
-          </SubTitle>
-          <Category>{text?.post.postCategory}</Category>
-          <Content>{text?.post.postContent}</Content>
-          <CommentCount>댓글 {text?.post.commentCount}개</CommentCount>
-        </Section>
-        <CommentInput />
-        <CommentList />
-      </Wrapper>
+      <ThemeProvider theme={theme}>
+        <GlobalStyle />
+        <Header themeMode={themeMode} toggleTheme={toggleTheme} />
+        <Wrapper>
+          <Section>
+            <Title>{text?.post.postTitle}</Title>
+            <SubTitle>
+              <Time>{text?.post.createTime}</Time>
+              <Buttons>
+                <Patch
+                  onClick={() => {
+                    onClickPatch(text?.post.postId);
+                  }}
+                >
+                  수정
+                </Patch>
+                <Delete
+                  onClick={() => {
+                    onClickDelete(text?.post.postId);
+                  }}
+                >
+                  삭제
+                </Delete>
+              </Buttons>
+            </SubTitle>
+            <Category>{text?.post.postCategory}</Category>
+            <Content>{text?.post.postContent}</Content>
+            <CommentCount>댓글 {text?.post.commentCount}개</CommentCount>
+          </Section>
+          <CommentInput />
+          <CommentList />
+        </Wrapper>
+      </ThemeProvider>
     </>
   );
 }
@@ -139,6 +149,7 @@ const Time = styled.div`
   font-size: 0.8rem;
   opacity: 0.6;
 `;
+const Buttons = styled.div``;
 const Patch = styled.button`
   font-size: 0.7rem;
   opacity: 0.6;
@@ -147,6 +158,8 @@ const Patch = styled.button`
   :hover {
     color: ${colors.main};
   }
+  background-color: ${({ theme }) => theme.mode.bgColor};
+  color: ${({ theme }) => theme.mode.color};
 `;
 const Delete = styled.button`
   padding-left: 0.5rem;
@@ -157,6 +170,8 @@ const Delete = styled.button`
   :hover {
     color: ${colors.main};
   }
+  background-color: ${({ theme }) => theme.mode.bgColor};
+  color: ${({ theme }) => theme.mode.color};
 `;
 const Content = styled.div`
   padding-top: 3.5rem;

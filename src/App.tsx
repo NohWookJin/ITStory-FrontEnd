@@ -5,33 +5,46 @@ import Header from './components/Header';
 import IntroSection from './components/IntroSection';
 import Main from './components/Main';
 import ListSection from './components/ListSection';
+
+//hooks
 import usePosts from './hooks/api/usePosts';
+import { useDarkMode } from './hooks/useDarkMode';
 //css
 import styled, { ThemeProvider } from 'styled-components';
 import { GlobalStyle } from './styles/GlobalStyle';
-// import { colors } from './styles/Colors';
-// import { lightTheme, darkTheme } from './styles/Theme';
+import { lightTheme, darkTheme } from './styles/Theme';
 
 export default function App() {
   const { isLoading } = usePosts();
+  const [themeMode, toggleTheme] = useDarkMode();
+  const theme = themeMode === 'lightTheme' ? { mode: lightTheme } : { mode: darkTheme };
 
   return (
     <>
-      <GlobalStyle />
-      <Container>
-        <Header />
-        <IntroSection />
-        <Main />
-        <ListSection />
-        {isLoading && <Loading />}
-      </Container>
+      <ThemeProvider theme={theme}>
+        <GlobalStyle />
+        <Container>
+          <Header themeMode={themeMode} toggleTheme={toggleTheme} />
+          <Background>
+            <IntroSection />
+            <Main />
+            <ListSection />
+          </Background>
+          {isLoading && <Loading />}
+        </Container>
+      </ThemeProvider>
     </>
   );
 }
 
+const Background = styled.div`
+  background-color: ${({ theme }) => theme.mode.bgColor};
+`;
 const Container = styled.div`
   width: 100vw;
   min-width: 50vw;
+
+  color: ${({ theme }) => theme.mode.color};
 `;
 const Loading = styled.div`
   position: fixed;

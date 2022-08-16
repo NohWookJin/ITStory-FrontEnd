@@ -1,12 +1,14 @@
-import usePosts from '../hooks/api/usePosts';
 import { Link } from 'react-router-dom';
 
+//hooks
+import usePosts from '../hooks/api/usePosts';
+
+//css
 import styled from 'styled-components';
 import { colors } from '../styles/Colors';
 
 export default function SearchList() {
   const { searchValue } = usePosts();
-  console.log(searchValue);
 
   return (
     <>
@@ -62,6 +64,9 @@ const Container = styled.div`
   @media screen and (max-width: 1150px) {
     padding: 0 10rem;
   }
+  @media screen and (max-width: 700px) {
+    padding: 0 7.5rem;
+  }
   @media screen and (max-width: 500px) {
     padding: 0 5rem;
   }
@@ -85,6 +90,8 @@ const Title = styled.span`
   margin: 1rem 0;
   margin-bottom: 1.7rem;
   margin-left: 0.1rem;
+  background-color: ${({ theme }) => theme.mode.bgColor};
+  color: ${({ theme }) => theme.mode.color};
 `;
 const Category = styled.div`
   font-size: 0.65rem;
@@ -108,6 +115,8 @@ const Wrapper = styled.div`
   margin-top: 0.5rem;
   margin-bottom: 1rem;
   margin-left: 0.1rem;
+  background-color: ${({ theme }) => theme.mode.bgColor};
+  color: ${({ theme }) => theme.mode.color};
 `;
 const Id = styled.span`
   font-size: 0.7rem;

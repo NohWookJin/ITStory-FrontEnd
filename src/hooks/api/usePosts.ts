@@ -18,6 +18,12 @@ export default function usePosts() {
   const [postValue, setPostValue] = useRecoilState(postValueState);
   const [searchValue, setSearchValue] = useRecoilState(searchValueState);
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [isDarkMode, setIsDarkMode] = useState<boolean>(false);
+
+  const toggleDarkMode = () => {
+    alert('미완성');
+    setIsDarkMode(prev => !prev);
+  };
 
   const navigate = useNavigate();
 
@@ -55,5 +61,16 @@ export default function usePosts() {
     await instance.patch(`/post/${postId}`);
   }
 
-  return { postValue, refreshPosts, createPost, deletePost, patchPost, isLoading, refreshSearch, searchValue };
+  return {
+    postValue,
+    refreshPosts,
+    createPost,
+    deletePost,
+    patchPost,
+    isLoading,
+    refreshSearch,
+    searchValue,
+    isDarkMode,
+    toggleDarkMode,
+  };
 }

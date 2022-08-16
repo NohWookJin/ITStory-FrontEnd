@@ -1,10 +1,12 @@
 import { useEffect, useState } from 'react';
-import usePosts from '../hooks/api/usePosts';
-import { colors } from '../styles/Colors';
-import { GlobalStyle } from '../styles/GlobalStyle';
-
-import styled from 'styled-components';
 import { Link } from 'react-router-dom';
+
+//hooks
+import usePosts from '../hooks/api/usePosts';
+
+//css
+import styled from 'styled-components';
+import { colors } from '../styles/Colors';
 
 export default function ListSection() {
   const { postValue } = usePosts();
@@ -17,7 +19,6 @@ export default function ListSection() {
             <StlyedLink to={`/posts/${list.postId}`}>
               <Title>{list.postTitle}</Title>
               <Category>{list.postCategory}</Category>
-              {/* <Content>{list.postContent}</Content> */}
               <Wrapper>
                 <div>
                   <Id>{list.postId}번째 글</Id>
@@ -40,6 +41,9 @@ const Container = styled.div`
   @media screen and (max-width: 1150px) {
     padding: 0 10rem;
   }
+  @media screen and (max-width: 700px) {
+    padding: 0 7.5rem;
+  }
   @media screen and (max-width: 500px) {
     padding: 0 5rem;
   }
@@ -55,14 +59,17 @@ const List = styled.div`
   padding: 0 0.35rem;
   min-width: 50vw;
   margin-bottom: 3rem;
-  border-bottom: 0.1rem solid rgba(217, 188, 238, 0.45);
+  border-bottom: 0.1rem solid rgba(217, 188, 238, 0.3);
 `;
 const Title = styled.span`
+  color: black;
   font-size: 1.8rem;
   font-weight: 800;
   margin: 1rem 0;
   margin-bottom: 1.7rem;
   margin-left: 0.1rem;
+  background-color: ${({ theme }) => theme.mode.bgColor};
+  color: ${({ theme }) => theme.mode.color};
 `;
 const Category = styled.div`
   font-size: 0.65rem;
@@ -86,6 +93,8 @@ const Wrapper = styled.div`
   margin-top: 0.5rem;
   margin-bottom: 1rem;
   margin-left: 0.1rem;
+  background-color: ${({ theme }) => theme.mode.bgColor};
+  color: ${({ theme }) => theme.mode.color};
 `;
 const Id = styled.span`
   font-size: 0.7rem;

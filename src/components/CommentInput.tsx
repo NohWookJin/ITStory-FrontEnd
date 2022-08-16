@@ -1,4 +1,6 @@
 import React, { FormEvent } from 'react';
+
+//hooks
 import useComments from '../hooks/api/useComments';
 import useCommentInput from '../hooks/useCommentInput';
 
@@ -42,6 +44,9 @@ const Wrapper = styled.div`
   @media screen and (max-width: 1150px) {
     padding: 0 10rem;
   }
+  @media screen and (max-width: 700px) {
+    padding: 0 7.5rem;
+  }
   @media screen and (max-width: 500px) {
     padding: 0 5rem;
   }
@@ -63,9 +68,14 @@ const CommentWriter = styled.input`
   @media screen and (max-width: 1150px) {
     width: 10%;
   }
+  @media screen and (max-width: 700px) {
+    width: 10%;
+  }
   @media screen and (max-width: 500px) {
     width: 10%;
   }
+  background-color: ${({ theme }) => theme.mode.bgColor};
+  color: ${({ theme }) => theme.mode.color};
 `;
 const CommentContent = styled.input`
   width: 77.5%;
@@ -79,9 +89,14 @@ const CommentContent = styled.input`
   @media screen and (max-width: 1150px) {
     width: 70%;
   }
+  @media screen and (max-width: 700px) {
+    width: 70%;
+  }
   @media screen and (max-width: 500px) {
     width: 70%;
   }
+  background-color: ${({ theme }) => theme.mode.bgColor};
+  color: ${({ theme }) => theme.mode.color};
 `;
 const CommentSubmit = styled.button`
   opacity: 0.6;
@@ -92,4 +107,6 @@ const CommentSubmit = styled.button`
     opacity: 1;
     color: ${colors.main};
   }
+  background-color: ${({ theme }) => theme.mode.bgColor};
+  color: ${({ theme }) => theme.mode.color};
 `;

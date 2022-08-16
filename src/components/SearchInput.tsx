@@ -1,24 +1,15 @@
 import { useState, useEffect, ChangeEvent, FormEvent } from 'react';
-import { Navigate, useNavigate } from 'react-router';
-import styled from 'styled-components';
-import { instance } from '../libs/api';
+import { useNavigate } from 'react-router';
+
+//hooks
 import usePosts from '../hooks/api/usePosts';
+
+//css
+import styled from 'styled-components';
 
 interface Props {
   initialValue?: string;
 }
-
-interface IGetPosts {
-  postCategory: string;
-  postId: number;
-  postTitle: string;
-  postContent: string;
-  createTime: string;
-}
-
-// 해야 될 것
-// 1. result를 전역 state에 담는다.
-// 2. 전역 state 값을 다른 라우터에서 뿌린다.
 
 export default function SearchInput({ initialValue = '' }: Props) {
   const [search, setSearch] = useState(initialValue);
@@ -29,6 +20,9 @@ export default function SearchInput({ initialValue = '' }: Props) {
     e.preventDefault();
     refreshSearch(search);
     navigate(`/search/${search}`);
+    if (search == '') {
+      navigate('/');
+    }
   }
 
   function onChangeSearch(e: ChangeEvent<HTMLInputElement>) {
@@ -51,7 +45,7 @@ const Input = styled.input`
   border: none;
   padding: 0.3rem 0rem;
   padding-left: 0.1rem;
-  border-radius: 0.1rem;
+  border-radius: 0.3rem;
   width: 20vw;
   :focus {
     outline: none;
@@ -64,5 +58,5 @@ const Input = styled.input`
   }
 `;
 const Button = styled.button`
-  opacity: 0;
+  display: none;
 `;

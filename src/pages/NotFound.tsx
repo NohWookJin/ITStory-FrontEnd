@@ -2,7 +2,6 @@ import { useNavigate } from 'react-router-dom';
 
 //css
 import styled from 'styled-components';
-import { GlobalStyle } from '../styles/GlobalStyle';
 import { colors } from '../styles/Colors';
 
 export default function NotFound() {
