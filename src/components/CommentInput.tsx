@@ -48,7 +48,7 @@ const Wrapper = styled.div`
     padding: 0 7.5rem;
   }
   @media screen and (max-width: 500px) {
-    padding: 0 5rem;
+    padding: 0 1.8rem;
   }
 `;
 const Form = styled.form`

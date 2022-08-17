@@ -105,6 +105,10 @@ const TitleInput = styled.input`
   font-size: 2rem;
   background-color: ${({ theme }) => theme.mode.bgColor};
   color: ${({ theme }) => theme.mode.color};
+
+  @media screen and (max-width: 500px) {
+    margin-top: 0.5rem;
+  }
 `;
 const CategoryInput = styled.input`
   border: none;
@@ -129,6 +133,9 @@ const PatchBtn = styled.button`
   margin-left: 0.5rem;
   color: ${colors.white};
   background-color: ${colors.main};
+  @media screen and (max-width: 500px) {
+    width: 25%;
+  }
 `;
 const SubmitBtn = styled.button`
   border: none;
@@ -136,4 +143,7 @@ const SubmitBtn = styled.button`
   padding: 0.5rem 0;
   color: ${colors.white};
   background-color: ${colors.main};
+  @media screen and (max-width: 500px) {
+    width: 25%;
+  }
 `;
