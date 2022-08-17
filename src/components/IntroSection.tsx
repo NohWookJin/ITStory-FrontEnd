@@ -22,7 +22,6 @@ const Wrapper = styled.div`
   height: 20%;
   display: flex;
   justify-content: center;
-
   @media screen and (max-width: 1150px) {
     padding: 0 10rem;
   }
@@ -32,6 +31,7 @@ const Wrapper = styled.div`
   @media screen and (max-width: 500px) {
     padding: 0 5rem;
   }
+  padding-top: 2rem;
 `;
 const Border = styled.div`
   display: flex;

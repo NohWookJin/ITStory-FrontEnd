@@ -66,7 +66,7 @@ export default function InputSection() {
               tabIndex: -1,
             },
           }}
-          minEditorHeight={490}
+          minEditorHeight={500}
         ></ReactMde>
         <BtnContainer>
           <SubmitBtn>등록</SubmitBtn>
@@ -91,6 +91,7 @@ const Form = styled.form`
   margin-top: 2.3rem;
 `;
 const TitleInput = styled.input`
+  margin-top: 3rem;
   :focus {
     outline: none;
   }
