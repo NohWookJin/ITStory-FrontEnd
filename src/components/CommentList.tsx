@@ -54,7 +54,7 @@ const Wrapper = styled.div`
     padding-bottom: 10rem;
   }
   @media screen and (max-width: 500px) {
-    padding: 0 5rem;
+    padding: 0 1.8rem;
     padding-bottom: 10rem;
   }
 `;

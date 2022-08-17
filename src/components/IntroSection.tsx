@@ -31,6 +31,9 @@ const Wrapper = styled.div`
   @media screen and (max-width: 500px) {
     padding: 0 5rem;
   }
+  @media screen and (max-width: 500px) {
+    padding: 0 1.8rem;
+  }
   padding-top: 2rem;
 `;
 const Border = styled.div`
@@ -58,6 +61,10 @@ const Text = styled.div`
   display: flex;
   flex-direction: column;
   padding-left: 2rem;
+  @media screen and (max-width: 500px) {
+    padding-left: 1rem;
+    padding-right: 2rem;
+  }
 `;
 const TextTitle = styled.span`
   font-size: 1.5rem;
@@ -67,7 +74,7 @@ const TextTitle = styled.span`
     font-size: 1.2rem;
   }
   @media screen and (max-width: 500px) {
-    font-size: 1rem;
+    font-size: 1.3rem;
   }
 `;
 const TextSub = styled.span`
@@ -75,6 +82,6 @@ const TextSub = styled.span`
   font-weight: 600;
   opacity: 0.8;
   @media screen and (max-width: 500px) {
-    font-size: 0.8rem;
+    font-size: 0.7rem;
   }
 `;

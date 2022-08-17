@@ -47,6 +47,9 @@ const Container = styled.div`
   @media screen and (max-width: 500px) {
     padding: 0 5rem;
   }
+  @media screen and (max-width: 500px) {
+    padding: 0 1.8rem;
+  }
 `;
 const StlyedLink = styled(Link)`
   text-decoration: none;
