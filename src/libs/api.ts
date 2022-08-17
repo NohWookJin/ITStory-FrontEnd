@@ -1,7 +1,7 @@
 import axios, { AxiosResponse, AxiosRequestConfig, AxiosError } from 'axios';
 
 export const instance = axios.create({
-  baseURL: 'http://15.164.225.190/',
+  baseURL: 'https://api.itstory.shop/',
 });
 
 function requestInterceptor(config: AxiosRequestConfig) {
